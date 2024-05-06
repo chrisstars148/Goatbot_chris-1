@@ -1,5 +1,47 @@
-const axios=require('axios');
+const axios = require('axios');
 
-const apiEndpoint='https://sandipapi.onrender.com/gpt';
+const Prefixes = [
+  'AI',
+  'ai',
+  'megan',
+  'Ai',
+];
 
-module.exports={config:{name:"ai",version:1.0,author:"coffee",longDescription:"AI",category:"ai",guide:{en:"{p}questions"}},onStart:async()=>{},onChat:async({event,message})=>{try{const{body}=event;if(!(body&&body.toLowerCase().startsWith("ai")))return;const prompt=body.substring(2).trim();if(!prompt)return await message.reply("𝙈𝙀𝙂𝘼𝙉-𝘼𝙀| 🧋✨\n━━━━━━━━━━━━━━━\nHi! Ask me anything!\n━━━━━━━━━━━━━━━");const response=await axios.get(`${apiEndpoint}?prompt=${encodeURIComponent(prompt)}`);if(response.status===200)await message.reply(`𝙼𝚘𝚌𝚑𝚊 | 🧋✨\n━━━━━━━━━━━━━━━\n${response.data.answer}\n━━━━━━━━━━━━━━━`);else throw new Error(`Failed to fetch data. Status: ${response.status}`);}catch(error){console.error("Error:",error.message);}}};
+module.exports = {
+  config: {
+    name: "ai",
+    version: 1.0,
+    author: "fatkey",
+    longDescription: "chatGptAI",
+    category: "ai",
+    guide: {
+      en: "{p} questions",
+    },
+  },
+  onStart: async function () {},
+  onChat: async function ({ api, event, args, message }) {
+    try {
+      
+      const prefix = Prefixes.find((p) => event.body && event.body.toLowerCase().startsWith(p));
+      if (!prefix) {
+        return; // Invalid prefix, ignore the command
+      }
+      const prompt = event.body.substring(prefix.length).trim();
+   if (!prompt) {
+        await message.reply("🧑🏻‍💻chris stars\n━━━━━━━━━━━━━━\n\nHello! How can I assist you today.⚪");
+        return;
+      }
+
+
+      const response = await axios.get(`https://sandipbaruwal.onrender.com/gpt?prompt=hello${encodeURIComponent(prompt)}`);
+      const answer = response.data.answer;
+
+ 
+    await message.reply(`🧑🏻‍💻chris stars\n━━━━━━━━━━━━━━\n${answer}\n━━━━━━━━━━━━━━\n🟢 𝘔𝘦𝘵𝘰𝘶𝘴𝘩𝘦𝘭𝘢 𝘸𝘢𝘭𝘬𝘦𝘳 ⚪`);
+
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
+  }
+};
+        
