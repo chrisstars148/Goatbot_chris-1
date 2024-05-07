@@ -28,7 +28,7 @@ module.exports = {
       }
       const prompt = event.body.substring(prefix.length).trim();
    if (!prompt) {
-        await message.reply("🧑🏻‍💻chris stars\n━━━━━━━━━━━━━━\n\nHello! How can I assist you today.⚪");
+        await message.reply("CHRIS STARS\n━━━━━━━━━━━━━━\n\nHello! How can I assist you today.⚪");
         return;
       }
 
@@ -37,11 +37,10 @@ module.exports = {
       const answer = response.data.answer;
 
  
-    await message.reply(`🧑🏻‍💻chris stars\n━━━━━━━━━━━━━━\n${answer}\n━━━━━━━━━━━━━━\n🟢 𝘔𝘦𝘵𝘰𝘶𝘴𝘩𝘦𝘭𝘢 𝘸𝘢𝘭𝘬𝘦𝘳 ⚪`);
+    await message.reply(`CHRIS STARS 🧑🏻‍💻\n━━━━━━━━━━━━━━\n${answer}\n━━━━━━━━━━━━━━\nCHRIS STARS`);
 
     } catch (error) {
       console.error("Error:", error.message);
     }
   }
 };
-        
